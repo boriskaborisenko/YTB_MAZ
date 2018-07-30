@@ -1,0 +1,26 @@
+{
+  "name": "ytb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ytb.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "simple-youtube-api": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boriskaborisenko/YTB_MAZ.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boriskaborisenko/YTB_MAZ/issues"
+  },
+  "homepage": "https://github.com/boriskaborisenko/YTB_MAZ#readme"
+}
