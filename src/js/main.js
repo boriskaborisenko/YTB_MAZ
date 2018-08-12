@@ -23,10 +23,18 @@ function getChannel(key, id) {
       if (this.readyState == 4 && this.status == 200) {
         const answer = JSON.parse(this.responseText);
 
-        let newDiv
+        let newRow
         if(answer.results.error == 'blocked'){
-            newDiv = '<div class="item error">Channel ID: <b>'+answer.results.id+'</b> error! </div>';
+            //newDiv = '<div class="item error">Channel ID: <b>'+answer.results.id+'</b> error! </div>';
+           // newRow = '<tr><td>'+answer.results.id+'</td><td>ERROR</td><td>-</td><td>-</td><td>-</td></tr>';
+            newRow = answer.results.id+',ERROR,-,-,-<br>';
         }else{
+            let aaa = answer.results.raw.snippet.localized;
+            let bbb = answer.results.raw.statistics;
+            newRow = answer.results.id+','+aaa.title+','+bbb.videoCount+','+bbb.viewCount+','+bbb.subscriberCount+'<br>';
+            //newRow = '<tr><td>'+answer.results.id+'</td><td>'+aaa.title+'</td><td>'+ bbb.videoCount+'</td><td>'+bbb.viewCount+'</td><td>'+bbb.subscriberCount+'</td></tr>';
+            
+            /*
             newDiv = '<div class="item">'+
             '<div class="cid"> Channel ID: <b>'+ answer.results.id +'</b></div>'+
             '<div class="title"><b>'+ answer.results.raw.snippet.localized.title +'</b></div>'+
@@ -36,10 +44,11 @@ function getChannel(key, id) {
             '<div class="st">Subs: '+ answer.results.raw.statistics.subscriberCount+'</div>'+
             '<div class="st">Comments: '+ answer.results.raw.statistics.commentCount+'</div>'+
             '</div>';
+            */
         }
 
        let el = document.querySelector('#output');
-       el.innerHTML += newDiv;
+       el.innerHTML += newRow;
         
         console.log(answer);
       }
