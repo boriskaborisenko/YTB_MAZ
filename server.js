@@ -9,6 +9,10 @@ const YouTube = require('simple-youtube-api');
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/index.html');
 });
+app.get('/list',function(req,res){
+    res.sendFile(__dirname+'/list.html');
+});
+
 
 app.get('/api/:key/:channelid', (req,res) => {
     new YouTube(req.params.key).getChannelByID(req.params.channelid, {'part': 'snippet,contentDetails,statistics'})
@@ -26,6 +30,32 @@ app.get('/api/:key/:channelid', (req,res) => {
     }) 
     );
 });
+
+app.get('/api/playlist/:key/:channelid', (req,res) => {
+
+    new YouTube(req.params.key).getChannelByID(req.params.channelid, {'part': 'snippet,contentDetails,statistics'})
+    .then(results => {
+      const list = results.raw.contentDetails.relatedPlaylists.uploads;
+
+      new YouTube(req.params.key).getPlaylistByID(list)
+    .then(playlist => {
+        //console.log(`The playlist's title is ${playlist.title}`);
+        playlist.getVideos()
+            .then(videos => {
+                res.json({
+                    videos
+                })
+            })
+            .catch(console.log);
+    })
+    .catch(console.log);
+
+    })
+    .catch(console.error);
+
+    
+});
+
 
 
 

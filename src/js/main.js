@@ -57,7 +57,12 @@ function getChannel(key, id) {
     xhttp.send();
   }
 
-function pushTheButton(){
+
+  
+
+
+
+  function pushTheButton(){
     let out = document.getElementById('output');
         out.innerHTML = '';
     const apikey = document.getElementById('apikey').value;
@@ -65,5 +70,48 @@ function pushTheButton(){
     const newdata = data.split(', ');
     newdata.map( (i) =>  getChannel(apikey, i) );
 }
+
+
+//////////////////////////COPY CODE ////////////////////////////////
+
+
+function getListFunc(key, channelid) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+        document.getElementById("loader").style.display = "block";
+       
+        if (this.readyState == 4 && this.status == 200) {
+        const answer = JSON.parse(this.responseText);
+        document.getElementById("loader").style.display = "none";
+        
+        const pl = answer;        
+        //console.log(pl);
+        pl.videos.map((video) => {
+            var node = document.createElement("tr"); 
+            var node2 = document.createElement("td"); 
+            var textnode = document.createTextNode(video.title);   
+            node.appendChild(node2);                              
+            node2.appendChild(textnode);
+            document.getElementById("table").appendChild(node);
+            console.log(video.title)
+        })
+        console.log('loading end')
+      }
+    };
+    xhttp.open("GET", "http://localhost:3333/api/playlist/"+key+'/'+channelid, true);
+    xhttp.send();
+  }
+
+function getList(){
+    let out = document.getElementById('table');
+    out.innerHTML = '';
+    const apikey = document.getElementById('apikey').value;
+    const data = document.getElementById('chid').value;
+    getListFunc(apikey, data);
+}
+
+//////////////////////////COPY CODE ////////////////////////////////
+//test git
 
  

@@ -1,6 +1,7 @@
 html, body{margin: 0; padding: 0; background-color: #fafbfc; font-family: 'Arial';}
 #all{width: 80%; margin: 30px auto;}
 #apikey{width: 100%; box-sizing: border-box; padding: 7px; font-weight: 700;}
+#chid{width: 100%; box-sizing: border-box; padding: 7px; font-weight: 700;}
 .mini{margin-top: 10px;}
 .area{resize: none; width: 100%; height: 50px; box-sizing: border-box;}
 
